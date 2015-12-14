@@ -1,4 +1,5 @@
 # find 3 pairs of 2 consecutive same letters
+# test
 
 def searchdoubles(line):
     index = 0
