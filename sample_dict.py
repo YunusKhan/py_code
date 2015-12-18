@@ -5,15 +5,12 @@ import collections
 
 def arrangedict_frmsys(dict, pref, suff):    
     oldsuf = dict.has_key(pref)
-    print oldsuf
     if oldsuf == False :
         dict[pref]=suff
     else:
         val = dict.get(pref)
-        val = val + ',' + suff
-        print val
-        dict[pref]=val
-    
+        val = val + ',' + suff        
+        dict[pref]=val    
     return dict
 
 
@@ -93,7 +90,7 @@ if __name__ == '__main__':
                 line4 = sys.stdin.readline()
                 suff2 = re.sub('\\n', '', line4)
                 line4=''
-                dict = arrangedict_frmsys(dict, t, suff2)
+                dict = arrangedict_frmsys(dict, t, suff2)            
             print "\n\nEnter more words to match or Ctrl+C to quit\n\n"
         else:
             print " \n\n This is a new string ... Enter the next string to add to dictionary\n\n"
