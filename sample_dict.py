@@ -56,8 +56,13 @@ def arrangedict():
 
 if __name__ == '__main__':
     dict = {}
+    # adding all elements of file pg78.txt to the dictionary
+    
     dict = arrangedict()
-    print "\n\nEnter words to see the next potential substring... \n\n"
+    # optionally you can print all arg after it adds just to check
+    #print dict
+
+    print "\n\nEnter words to see the next potential match of word(s)... \n\n"
     while 1:
         
         try:            
@@ -69,38 +74,32 @@ if __name__ == '__main__':
             break
         
         t = re.sub('\\n', '', line)
-        #os.system('CLS')
+        os.system('CLS')
         
-        print "\n\nYou entered ... \n\n"
-        print line
+        print "\n\nYou entered ... " , line        
         val  = dict.get(t)        
-        
-        
-        
         if(val):
-            print " \n\nNext set of probable words are .. \n\n "
-            print val
+            print t , "-->", val            
             print "\n\nDo you want to enter a new substring to this prefix?"
-            print "If yes, press 1 else press enter\n\n"
+            print "If yes, press suffix, else press enter\n\n"
             line3 = sys.stdin.readline()
-            istrng = re.sub('\\n', '', line3)
-            line3=''
-            if int(istrng) == 1:
-                print "\n\n .. Enter the new suffix \n\n"
-                line4 = sys.stdin.readline()
-                suff2 = re.sub('\\n', '', line4)
-                line4=''
-                dict = arrangedict_frmsys(dict, t, suff2)            
+            istrng = re.sub('\\n', '', line3)            
+            if line3 != '' :
+                suff2 = re.sub('\\n', '', line3)
+                dict = arrangedict_frmsys(dict, t, suff2)
+                os.system('CLS')
+                val2 = dict.get(t)
+                print "\n\n", t , "-->", val2            
+                
             print "\n\nEnter more words to match or Ctrl+C to quit\n\n"
         else:
-            print " \n\n This is a new string ... Enter the next string to add to dictionary\n\n"
+            print " \n\n This is a new string not in dictionary... Enter the next string to add to dictionary\n\n"
 
             line2 = sys.stdin.readline()
             pref = re.sub('\\n', '', line)
             suff = re.sub('\\n', '', line2)
             dict = arrangedict_frmsys(dict, pref, suff)
-            line2 = ''
-            line1 = ''
-            print " \n\nNew subset of strings added to dictionary\n\n"
-            print "\n\nEnter more words to match or Ctrl+C to quit\n\n"
+            os.system('CLS')
+            print " \n\nNew subset of strings added to dictionary\n\n", pref , "-->" , suff
+            print "\n\nEnter more words to predict potential substrings or Ctrl+C to quit\n\n"
             
