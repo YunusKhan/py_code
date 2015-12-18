@@ -45,7 +45,7 @@ def arrangedict():
                     dict[pref] = ind1                
                     pref = ind
                     ind1 = '' 
-                if ind in dict:   # if K, need to save for next iteration  . K is always V in (current iteration)-1, so checking here itself and flagging repeat
+                if ind in dict:   # if K, need to save for next iteration  . V is always K in (current iteration)-1, so checking here itself and flagging repeat
                     ind1 = dict.get(ind)                
                     rpt = 1
                     dict[pref] = ind
