@@ -3,13 +3,12 @@ import sys
 import re
 import collections
 
-def arrangedict_frmsys(dict, pref, suff):
-    # adds a new item in the dictionary from command line
-    oldsuf = dict.has_key(pref) # checking if K exists
-    if oldsuf == False :        # if new K, add [K,V]
+def arrangedict_frmsys(dict, pref, suff):    
+    oldsuf = dict.has_key(pref)
+    if oldsuf == False :
         dict[pref]=suff
     else:
-        val = dict.get(pref)    # if key, then append to new V to existing V and add to [K,V]
+        val = dict.get(pref)
         val = val + ',' + suff        
         dict[pref]=val    
     return dict
@@ -19,38 +18,38 @@ def arrangedict_frmsys(dict, pref, suff):
 def arrangedict():
     fd = open('pg78.txt', "r")
     for line in fd:
-        line = line.lower() # for all lines convert to lowercase
+        line = line.lower()
         #t = re.sub(r'[_,":-;.]', ' ', line)    
-        t = re.sub(r'["\s,.";_:-]', ' ', line)  # strip all extra characters
-        t1 = re.split(' ', t)   # split and put in L
+        t = re.sub(r'["\s,.";_:-]', ' ', line)
+        t1 = re.split(' ', t)
         count = 0
         dict_count = 0
         for allc in t1:            
-                if allc == '':      # strip away empty strings in L                         
+                if allc == '':                               
                     t1 = t1[:count] + t1[count+1:]
                     count = count - 1
                 count = count + 1           
         rpt = 0
         
-        for ind in t1:        # for all elements in L
-            if dict_count == 0:            # first element is skipped
+        for ind in t1:        
+            if dict_count == 0:            
                 pref = ind
                 dict_count = dict_count + 1
             else:
                 
-                if rpt == 1:    # if key, then append to new V to existing V and add to [K,V]
+                if rpt == 1:
                     
                     rpt = 0
                     ind1 = ind1 + ',' + ind
                     dict[pref] = ind1                
                     pref = ind
                     ind1 = '' 
-                if ind in dict:   # if K, need to save for next iteration  . K is always V in (current iteration)-1, so checking here itself and flagging repeat
+                if ind in dict:               
                     ind1 = dict.get(ind)                
                     rpt = 1
                     dict[pref] = ind
                     pref = ind
-                else:           # if new K, add [K,V]
+                else:
                     dict[pref] = ind
                     pref = ind           
     return dict
@@ -63,7 +62,7 @@ if __name__ == '__main__':
     # optionally you can print all arg after it adds just to check
     #print dict
 
-    print "\n\nEnter words to see the next potential match of word(s)... \n\n"
+    print "\n\nEnter words...\n\n"
     while 1:
         
         try:            
@@ -80,9 +79,7 @@ if __name__ == '__main__':
         print "\n\nYou entered ... " , line        
         val  = dict.get(t)        
         if(val):
-            print t , "-->", val            
-            print "\n\nDo you want to enter a new substring to this prefix?"
-            print "If yes, press suffix, else press enter\n\n"
+            print t , val
             line3 = sys.stdin.readline()
             istrng = re.sub('\\n', '', line3)            
             if line3 != '' :
